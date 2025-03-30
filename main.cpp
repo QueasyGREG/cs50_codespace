@@ -6,12 +6,13 @@
 
 class PromptSystem 
 {
-    private:
+private:
     std::vector<std::string> prompts;
     int delay_ms = 2000;
 
 
-    Public:
+public:
+        
         void add_prompt(const std::string& text) {
             prompts.push_back(text);
         }
@@ -20,8 +21,8 @@ class PromptSystem
             delay_ms = ms;
         }
 
-        void run() cont {
-            for (cont std::string& line : prompts) {
+        void run() const {
+            for (const std::string& line : prompts) {
                 std::cout << line << std::endl;
                 std::this_thread::sleep_for(std::chrono::milliseconds(delay_ms));
 
@@ -41,15 +42,17 @@ int main()
     std::cout << "what do they call you Gender? ";
     std::cin >> first_name; //only captures the first word
     
+    // Dialogue
     std::cout << "I don' reckin the name\n";
     std::cout << "...\n";
     std::cout << "Ya knowww...\n";
+
     //Prompt last name
-    std::cout << " what's yee last name, mate? ";
+    std::cout << "what's yee last name, mate? ";
     std::cin >> last_name; // also captures only first word
 
     // output full name
-    std::cout << "Well, Howdy" << first_name << " " << last_name << "!" << std::endl;
+    std::cout << "Well, Howdy " << first_name << " " << last_name << "!" << std::endl;
 
     return 0;
 }
