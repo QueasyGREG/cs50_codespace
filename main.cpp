@@ -1,3 +1,8 @@
+// Aurthor: Adam Britt
+// Date created: 3/30/25
+// File name: main.cpp
+// File description:
+
 #include <chrono>
 #include <iostream>
 #include <string>
