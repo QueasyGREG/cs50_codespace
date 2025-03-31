@@ -42,8 +42,9 @@ private:
 
 public:
         // Set the delay between texts
-        void set_delay(int ms) {
+        Text& set_delay(int ms) {
             delay_ms = ms;
+            return *this;
         }        
 
         // Add a single text
@@ -64,13 +65,22 @@ public:
         void run(bool keep_texts = false) {
             for (const auto& t : texts) {
                 std::cout << t.label << std::endl;
+                
                 if (t.wait) {
-                    std::cout << "[Press SPACE to continue...]" << std::flush;
-                    while (getch() != ' ') {}
-                } else {
-                    std::this_thread::sleep_for(std::chrono::milliseconds(delay_ms));
-                }
+                        // Wait 10 seconds before showing the spacebar prompt
+                        std::this_thread::sleep_for(std::chrono::seconds(10));
+
+                        std::cout << "[Press SPACE to continue...]" << std::flush;
+
+                    // wait for spacebar
+                   while (getch() != ' ') {}
+                
                 std::cout << std::endl;
+            } else {
+                std::this_thread::sleep_for(std::chrono::milliseconds(delay_ms));
+            }
+
+            std::cout << std::endl;
             }
             
             if (!keep_texts) {
@@ -138,53 +148,3 @@ int main()
 
     return 0;
 }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-    /*// Start dialouge ask for first name with pause
-    text.add_text("what do they call you Gender? ", true); // waits for input
-    text.run();
-
-    text.clear();
-    std::cin >> first_name;
-
-    text.clear(); // Prepare for the next text sequence
-   
-  
-
-
-}
-
-int main() 
-{
-    std::string first_name, last_name;
-
-    //prompt first name
-    std::cout << "what do they call you Gender? ";
-    std::cin >> first_name; //only captures the first word
-    
-    // Dialogue
-    std::cout << "I don' reckin the name\n";
-    std::cout << "...\n";
-    std::cout << "Ya knowww...\n";
-
-    //Prompt last name
-    std::cout << "what's yee last name, mate? ";
-    std::cin >> last_name; // also captures only first word
-
-    // output full name
-    std::cout << "Well, Howdy " << first_name << " " << last_name << "!" << std::endl;
-
-    return 0;
-}
-*/
